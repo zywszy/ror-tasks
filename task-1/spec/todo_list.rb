@@ -70,7 +70,7 @@ describe TodoList do
 
   context "with many items" do
     before do
-      list.remove_items()
+      list.remove_items
       list << "Do the loundry"
       list << "Wash the dishes"
       list << "Make dinner"
@@ -118,7 +118,7 @@ describe TodoList do
     end
 
     it "should revert order of all items" do
-      output_list = list.revert()
+      output_list = list.revert
       compare_lists(output_list, ["Megan's birthday party", "Make dinner", "Wash the dishes", "Do the loundry"])
     end
 
@@ -133,7 +133,7 @@ describe TodoList do
     end
 
     it "should print the list as in the example :)" do
-      printed = list.print()
+      printed = list.print
     end
 
   end

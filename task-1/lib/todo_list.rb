@@ -26,11 +26,11 @@ class TodoList
     @items.empty?
   end
 
-  def last()
+  def last
     @items.last
   end
 
-  def first()
+  def first
     @items.first
   end
 
@@ -46,7 +46,7 @@ class TodoList
     @status[index] = false
   end
 
-  def return_completed()
+  def return_completed
     completed_items = []
     iterator = 0
     @items.each do |item|
@@ -56,7 +56,7 @@ class TodoList
     completed_items
   end
   
-  def return_uncompleted()
+  def return_uncompleted
     uncompleted_items = []
     iterator = 0
     @items.each do |item|
@@ -66,7 +66,7 @@ class TodoList
     uncompleted_items
   end
 
-  def remove_items()
+  def remove_items
     @items = []
     @status = []
   end
@@ -123,11 +123,11 @@ class TodoList
     end
   end
 
-  def sort()
+  def sort
     @items.sort!()
   end
 
-  def print()
+  def print
     puts ""
     @items.each do |item|
       if @status[@items.index(item)] == true
