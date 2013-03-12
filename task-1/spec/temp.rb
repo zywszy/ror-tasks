@@ -7,13 +7,6 @@ describe TodoList do
   subject(:list)            { TodoList.new(items) }
   let(:items)               { [] }
   let(:item_description)    { "Buy toilet paper" }
-    
-  def compare_lists(output_list, compare_list)
-    output_list.each do |item|
-      break if item != compare_list.shift
-    end
-    compare_list.should be_empty
-  end
 
   it { should be_empty }
 
@@ -70,13 +63,20 @@ describe TodoList do
 
   context "with many items" do
     before do
-      list.remove_items()
+      list.remove_items
       list << "Do the loundry"
       list << "Wash the dishes"
       list << "Make dinner"
-      list << "Megan's birthday party"
+      list << "Megan's birthday party!"
       list.complete(0)
       list.complete(1)
+    end
+
+    def compare_lists(output_list, compare_list)
+      output_list.each do |item|
+        break if item.keys.first != compare_list.shift
+      end
+      compare_list.should be_empty
     end
 
     it "should return array containing completed items" do
@@ -86,7 +86,7 @@ describe TodoList do
     
     it "should return array containing uncompleted items" do
       output_list = list.return_uncompleted
-      compare_lists(output_list, ["Make dinner", "Megan's birthday party"])
+      compare_lists(output_list, ["Make dinner", "Megan's birthday party!"])
     end
     
     it "should delete all items" do
@@ -119,21 +119,20 @@ describe TodoList do
 
     it "should revert order of all items" do
       output_list = list.revert()
-      compare_lists(output_list, ["Megan's birthday party", "Make dinner", "Wash the dishes", "Do the loundry"])
+      compare_lists(output_list, ["Megan's birthday party!", "Make dinner", "Wash the dishes", "Do the loundry"])
     end
 
     it "should sort all the items" do
       output_list = list.sort
-      compare_lists(output_list, ["Do the loundry", "Make dinner", "Megan's birthday party", "Wash the dishes"])
+      compare_lists(output_list, ["Do the loundry", "Make dinner", "Megan's birthday party!", "Wash the dishes"])
     end
 
     it "should allows to change item describtion" do
-      list[2] = "Go for a beer"
-      list[2].should == "Go for a beer"
+      list[0] = "Siemasz"
+      list[0].should == "Siemasz"
     end
 
     it "should print the list as in the example :)" do
-      printed = list.print()
     end
 
   end
