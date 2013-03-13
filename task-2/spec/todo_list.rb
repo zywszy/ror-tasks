@@ -4,7 +4,7 @@ require_relative '../lib/exceptions'
 
 describe TodoList do
   subject(:list)            { TodoList.new(db: database) }
-  let(:database)            { stub! }
+  let(:database)            { stub }
   let(:item)                { Struct.new(:title,:description).new(title,description) }
   let(:title)               { "Shopping" }
   let(:description)         { "Go to the shop and buy toilet paper and toothbrush" }
