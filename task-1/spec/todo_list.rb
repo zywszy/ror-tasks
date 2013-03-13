@@ -69,7 +69,7 @@ describe TodoList do
   end
 
   context "with many items" do
-    before do
+    before:each do
       list.remove_items
       list << "Do the loundry"
       list << "Wash the dishes"
