@@ -29,6 +29,11 @@ describe TodoList do
     list.size.should == 6
   end
 
+  if "should return nil for first method if database is empty" do
+    stub(database).items_count { 0 }
+    list.first.should == nil
+  end
+
   it "should persist the added item" do
     mock(database).add_todo_item(item) { true }
     mock(database).get_todo_item(0) { item }
@@ -69,9 +74,16 @@ describe TodoList do
     let(:title)   { "" }
 
     it "should not add the item to the DB" do
-      dont_allow(database).add_todo_item(item)
+      stub(item).title {title}
+      expect{ list << item }.to raise_error(IllegalArgument)
+    end  
+  end
 
-      list << item
-    end
+  context "with nil item" do
+    let(:item)    { nil }
+
+    it "should not add the item to the DB" do
+      expect{ list << item }.to raise_error(IllegalArgument)
+    end  
   end
 end

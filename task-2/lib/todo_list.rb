@@ -18,9 +18,12 @@ class TodoList
   end
 
   def << (other_object)
-    begin
+    if other_object == nil
+      raise IllegalArgument  
+    elsif other_object.title == ""
+      raise IllegalArgument  
+    else
       @database.add_todo_item(other_object)
-    rescue
     end
   end
 
