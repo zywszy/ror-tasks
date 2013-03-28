@@ -4,10 +4,11 @@ require_relative '../lib/exceptions'
 
 describe TodoList do
   subject(:list)            { TodoList.new(db: database) }
-  let(:database)            { stub! }
-  let(:item)                { Struct.new(:title,:description).new(title,description) }
+  let(:database)            { stub }
+  let(:item)                { Struct.new(:title,:description,:state).new(title,description,state) }
   let(:title)               { "Shopping" }
   let(:description)         { "Go to the shop and buy toilet paper and toothbrush" }
+  let(:state)               { false }
 
   it "should raise an exception if the database layer is not provided" do
     expect{ TodoList.new(db: nil) }.to raise_error(IllegalArgument)
@@ -43,7 +44,7 @@ describe TodoList do
     mock(database).complete_todo_item(item,false) { true }
 
     list.toggle_state(0)
-    list.toggle_state(0)
+    list.toggle_state(0)    
   end
 
   it "should fetch the first item from the DB" do
