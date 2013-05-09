@@ -23,5 +23,4 @@ describe WalletAccount do
   it "should return acount balance" do
     wallet_account.balance.should == 100.0
   end
-
 end
