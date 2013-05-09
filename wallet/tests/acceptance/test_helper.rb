@@ -30,18 +30,18 @@ module WalletTestHelper
 #
 
   def supply_account(currency, amount)
-    supplier = AccountSupplier.new(find_account(currency))
+    supplier = BankAccountSupplier.new(find_account(currency))
     supplier.supply(amount)
   end
 
   def supply_wallet(currency, amount)
-    supplier = MoneySupplier.new(find_account(currency), find_money(currency))
+    supplier = WalletAccountSupplier.new(find_account(currency), find_money(currency))
     supplier.supply(amount) 
     @money << WalletAccount.new(supplier.wallet_money.currency,supplier.wallet_money.amount)
   end
 
   def transfer_money(currency, amount)
-    supplier = AccountSupplier.new(find_account(currency), find_money(currency))
+    supplier = WalletAccountSupplier.new(find_account(currency), find_money(currency))
     supplier.supply(amount) 
   end
 
@@ -68,7 +68,7 @@ module WalletTestHelper
 
   def exchange_money(source_currency,target_currency,limit)
     @limit ||= get_balance(source_currency)
-    exchanger = MoneyExchanger.new(find_money(source_currency), find_moeny(target_currency), find_rate(source_currency, target_currency))
+    exchanger = WalletAccountExchanger.new(find_money(source_currency), find_moeny(target_currency), find_rate(source_currency, target_currency))
     exchanger.exchange(limit)
   end
 

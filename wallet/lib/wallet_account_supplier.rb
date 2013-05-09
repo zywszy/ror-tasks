@@ -2,20 +2,21 @@ class WalletAccountSupplier
 
   attr_reader :wallet_money
 
-  def initialize(account, money=nil) 
-    @account = account
-    @wallet_money = money
+  def initialize(bank_account, wallet_account=nil) 
+    @bank_account = bank_account
+    @wallet_account = wallet_account
   end
   
   def supply(amount)
-    if @wallet_money == nil
-      @wallet_money = WalletAccount.new(@account.currency, 0)
+    amount = BigDecimal.new(amount)
+    if @wallet_account == nil
+      @wallet_account = WalletAccount.new(@bank_account.currency, '0')
     end
-    if @account.balance < amount
+    if @bank_account.balance < amount
       raise NotEnaughMoney
     else
-      @account.amount -= amount
-      @wallet_money.amount += amount
+      @bank_account.amount -= amount
+      @wallet_account.amount += amount
     end
   end
 

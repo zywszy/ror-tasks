@@ -1,3 +1,5 @@
+require 'bigdecimal'
+
 class WalletAccount
 
   attr_accessor :currency, :amount
@@ -8,10 +10,11 @@ class WalletAccount
     else
       raise IllegalArgument
     end
-    if amount < 0
+    temporary_amount = BigDecimal.new(amount)
+    if temporary_amount < 0
       raise NotEnaughMoney
     else
-      @amount = amount.to_f
+      @amount = temporary_amount
     end
   end
 

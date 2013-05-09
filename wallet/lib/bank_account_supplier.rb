@@ -1,16 +1,17 @@
 class BankAccountSupplier
 
-  def initialize(account, money=nil)
-    @account = account
-    @wallet_money = money
+  def initialize(bank_account, wallet_account=nil) 
+    @bank_account = bank_account
+    @wallet_account = wallet_account
   end
-
+  
   def supply(amount)
-    if @wallet_money
-      @account.amount += amount
-      @wallet_money.amount -= amount
+    amount = BigDecimal.new(amount)
+    if @wallet_account
+      @bank_account.amount += amount
+      @wallet_account.amount -= amount
     else
-      @account.amount += amount
+      @bank_account.amount += amount
     end
   end
 
