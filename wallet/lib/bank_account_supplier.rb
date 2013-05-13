@@ -6,12 +6,12 @@ class BankAccountSupplier
   end
   
   def supply(amount)
-    amount = BigDecimal.new(amount)
-    if @wallet_account
+    amount = Money(amount)
+    if @wallet_account.nil?
       @bank_account.amount += amount
-      @wallet_account.amount -= amount
     else
       @bank_account.amount += amount
+      @wallet_account.amount -= amount
     end
   end
 

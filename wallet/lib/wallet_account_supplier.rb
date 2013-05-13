@@ -1,6 +1,6 @@
 class WalletAccountSupplier
 
-  attr_reader :wallet_money
+  attr_reader :wallet_account
 
   def initialize(bank_account, wallet_account=nil) 
     @bank_account = bank_account
@@ -8,7 +8,7 @@ class WalletAccountSupplier
   end
   
   def supply(amount)
-    amount = BigDecimal.new(amount)
+    amount = Money(amount)
     if @wallet_account == nil
       @wallet_account = WalletAccount.new(@bank_account.currency, '0')
     end

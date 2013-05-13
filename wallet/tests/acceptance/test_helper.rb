@@ -36,13 +36,10 @@ module WalletTestHelper
 
   def supply_wallet(currency, amount)
     supplier = WalletAccountSupplier.new(find_account(currency), find_money(currency))
-    supplier.supply(amount) 
-    @money << WalletAccount.new(supplier.wallet_money.currency,supplier.wallet_money.amount)
-  end
-
-  def transfer_money(currency, amount)
-    supplier = WalletAccountSupplier.new(find_account(currency), find_money(currency))
-    supplier.supply(amount) 
+    supplier.supply(amount)
+    unless @money.include?(supplier.wallet_account)
+      @money << supplier.wallet_account
+    end
   end
 
   def find_account(currency)

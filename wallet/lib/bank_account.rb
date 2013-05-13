@@ -8,7 +8,7 @@ class BankAccount
     else
       raise IllegalArgument
     end
-    temporary_amount = BigDecimal.new(amount)
+    temporary_amount = Money(amount)
     if temporary_amount < 0
       raise NotEnaughMoney
     else
