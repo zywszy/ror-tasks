@@ -57,6 +57,7 @@ describe TodoList do
       list.completed?(0).should be_false
     end
 
+<<<<<<< HEAD
     it "should change the state of a completed item" do
       list.complete(0)
       list.completed?(0).should be_true
@@ -102,6 +103,9 @@ describe TodoList do
     it "should delete item specified by index" do
       list.delete_at(0)
       list.first.should == "Wash the dishes"
+    
+    it "should allow to access the item by index" do
+      list[0].should.to_s.should == item_description
     end
 
     it "should remove all completed items" do
