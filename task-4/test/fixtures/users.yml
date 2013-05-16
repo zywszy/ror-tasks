@@ -1,0 +1,6 @@
+first_user:
+  forename: Sztefan
+  surename: Was
+  password: sztefan123
+  email: sztefan@4fun.tv
+  failed_login_count: 0

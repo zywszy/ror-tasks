@@ -12,7 +12,12 @@ module TestHelper
       tables = Dir["test/fixtures/*.yml"].map{|fn| File.basename(fn,".yml") }
       ActiveRecord::Fixtures.create_fixtures("test/fixtures/",tables)
       ActiveRecord::Base.transaction do
-        example.run
+        begin
+          example.run
+        rescue ActiveRecord::ActiveRecordError => e
+          puts e
+          raise Exception.new(e)
+        end
         raise ActiveRecord::Rollback
       end
     end
